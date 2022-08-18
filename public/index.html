@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node JS + vanilla (MetaMask installed)</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+        type="application/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1>Login With MetaMask using Node JS</h1>
+            <button onclick="login()">Login With MetaMask</button>
+            <button onclick="accessSecretContent()">Get Access To Secret Content</button>
+            <button onclick="logout()">Logout</button>
+        </div>   
+        <hr>
+            <div id="main" class="section">
+                <div id="NFTs"></div>
+                <div id="jwt-auth"></div>
+            <pre id="theMessage"></pre>
+        </div>
+    </div>
+    <script type="text/javascript" src="functions.js"></script>
+</body>
+</html>
