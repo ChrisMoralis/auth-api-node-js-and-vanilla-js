@@ -26,18 +26,18 @@ app.post("/verify-data", async (req,res) => {
   const {result} = await Moralis.Auth.verify(theSignedMessage);
   // Generate JWT
   const theJWT = await jwt.sign(result, process.env.ACCESS_TOKEN_SECRET);
-  const walletAddress = req.body.data.wallet;
   res.json({theJWT,...result});
 });
 
 // CHECK FOR VALID JWT
 // Verify if user can access 'secret content' by using the authenticateToken middleware function
-app.get('/secret', authenticateToken, (req, res) => {
-  res.json({access:true});
-})
+// app.get('/secret', authenticateToken, (req, res) => {
+//   res.json({access:true});
+// })
 
 // TOKEN GATING
 // Verify if user can access token-gated content by using the authenticateToken middleware function
+
 app.post("/token-gate", authenticateToken, async (req,res) => {
   // Calling Moralis NFT API polygon NFT id: 113461209507512867518933452141320285231135646094834536306130710983923277496520
   const options = {method: 'GET', headers: {Accept: 'application/json', 'X-API-Key': process.env.APIKEY}};
@@ -70,7 +70,7 @@ function authenticateToken(req, res, next) {
   const token = authHeader && authHeader.split(' ')[1];
   if (token == null) return res.sendStatus(401);
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    console.log(err)
+    
     if (err) return res.sendStatus(403)
     req.user = user
     next()
