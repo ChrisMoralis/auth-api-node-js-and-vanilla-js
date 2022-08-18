@@ -42,7 +42,6 @@ Let's remove all the content from the nodejs-dapp-from-scratch tutorial (if you 
 There are comments in the code to walk you through the functions and routes
 
 ## Next Steps
-You could add function to remove the JWT from the fakeTokenDB on logout
 
 You could develop this application to take the user back to the homepage and refresh the browser if they change their wallet. 
 
