@@ -50,16 +50,6 @@ const signTheMessage = async (message) => {
     return signature;
 }
 
-// const accessSecretContent = async () => {
-//     // Send JWT from local storate to backend to verify the user
-//     const secret = await axios.get(`${homepage}/secret`,{headers: { Authorization:localStorage.getItem('Authorization') }});
-//     if(secret.data.access){
-//         document.querySelector('#jwt-auth').innerHTML = `<div><p><h2>Congratulations</h2>Moralis Auth API has worked, you have a valid JWT</p></div><div><button onclick="checkNFTs()">Access Token Gated Content</div><hr/>`;  
-//     }else{
-//         document.querySelector('#jwt-auth').innerHTML = `<p>Sign in! You do not have a valid JWT</p> <hr/>`;
-//     }
-// }
-
 const checkNFTs = async () => {
     const wallet = await getWallet().then(res => res[0]);
     // Send JWT from local storate to backend to verify the user
