@@ -1,5 +1,3 @@
-// This can act as a fake database
-let fakeDB = {};
 const homepage = "http://localhost:3000";
 const login = async() => {
     document.querySelector('#NFTs').innerHTML = ``;
@@ -28,8 +26,6 @@ const login = async() => {
     // Save the JWT to local storage so it persist within the browser
     localStorage.setItem("Authorization", 'Bearer ' + verifyData.data.theJWT);
     console.log(verifyData.data);    
-    // Store the response and all the data so far to one of your databases?
-    fakeDB[wallet] = verifyData.data;
     // Update the frontend HTML with the response
     document.querySelector('#theMessage').innerHTML = `<pre>${JSON.stringify(verifyData.data, undefined, 2)}</pre>`;
     return {...res?.data.response};
