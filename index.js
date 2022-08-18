@@ -13,9 +13,6 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
-// Could be used to store data to simulate a database
-const fakeTokenDB = [];
-
 // Request a message from Moralis Auth API
 app.post("/send-data", async (req,res) => {
   const message = req.body.messageObject;
@@ -31,9 +28,8 @@ app.post("/verify-data", async (req,res) => {
   // Generate JWT
   const theJWT = await jwt.sign(result, process.env.ACCESS_TOKEN_SECRET);
   const walletAddress = req.body.data.wallet;
-  fakeTokenDB.push(theJWT);
   res.json({theJWT,...result});
-})
+});
 
 // CHECK FOR VALID JWT
 // Verify if user can access 'secret content' by using the authenticateToken middleware function
@@ -46,7 +42,8 @@ app.get('/secret', authenticateToken, (req, res) => {
 app.post("/token-gate", authenticateToken, async (req,res) => {
   // Calling Moralis NFT API polygon NFT id: 113461209507512867518933452141320285231135646094834536306130710983923277496520
   const options = {method: 'GET', headers: {Accept: 'application/json', 'X-API-Key': process.env.APIKEY}};
-  const nfts = await Moralis.EvmApi.account.getNFTs({address:String(req.body.walletAddress), chain:EvmChain.POLYGON})
+
+  const nfts = await Moralis.EvmApi.account.getNFTs({address:String(req.user.address._value), chain:EvmChain.POLYGON})
   .then((response)=>{
     let NFTs = [];
     if(response._data.total > 0){
@@ -74,14 +71,10 @@ function authenticateToken(req, res, next) {
   const token = authHeader && authHeader.split(' ')[1];
   if (token == null) return res.sendStatus(401);
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    const tokenExists = fakeTokenDB.filter(eachToken => eachToken === token);
-    if(tokenExists.length > 0){
-      res.locals.token = token;
-      next();
-    }else{
-      return res.sendStatus(401);
-    }
+    console.log(err)
+    if (err) return res.sendStatus(403)
+    req.user = user
+    next()
   })
 }
 
