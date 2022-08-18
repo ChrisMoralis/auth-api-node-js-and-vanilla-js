@@ -17,8 +17,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 app.post("/send-data", async (req,res) => {
   const message = req.body.messageObject;
   const response = await Moralis.Auth.requestMessage(message);
-  const wallet = req.body.messageObject.address;
-  res.json({response, wallet});
+  res.json({response});
 })
 
 // Verify signed message with Moralis Auth API then generate a JWT
