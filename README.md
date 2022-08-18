@@ -1,11 +1,13 @@
 ## Quickstart
-git clone this repo and 'cd' into it
-npm install
-replace .env.example with .env and enter your Moralis API key
-npm start
-Log into Metamask
-Set your `homepage` link
-For token gating - update the token ID information in `index.js`
+- git clone this repo and 'cd' into it
+- npm install
+- replace .env.example with .env and enter your Moralis API key
+- npm start
+- Log into Metamask
+- Set your `homepage` link in `functions.js`
+- For token gating - update the `token_id` information in `index.js`
+- public folder is for the front end
+- index.js is for the backend
 
 # Sign in With Node JS & Express
 This guide will show you how to implement a basic full-stack node JS application with a vanilla JS and HTML front-end where the user can login with their MetaMask wallet & Moralis Auth API and establish a JWT.
@@ -38,7 +40,7 @@ The first thing to do is generate your request object for requesting a message. 
 - "Get Access To Secret Content" will check whether JWT is valid and provide link to "Access Token Gated Content"
 - "Access Token Gated Content" will search through your NFTs for a specific token id (you need to configure which) and let you see content if you hold it
 
-## Configure the Server index.js
+## Configure the Server index.js and functions.js files
 Let's remove all the content from the nodejs-dapp-from-scratch tutorial (if you followed it) and use this.
 
 There are comments in the code to walk you through the functions and routes
