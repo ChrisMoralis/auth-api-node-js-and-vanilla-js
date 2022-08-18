@@ -10,7 +10,14 @@
 - index.js is for the backend
 
 # Sign in With Node JS & Express
-This guide will show you how to implement a basic full-stack node JS application with a vanilla JS and HTML front-end where the user can login with their MetaMask wallet & Moralis Auth API and establish a JWT.
+This guide will show you how to implement a basic full-stack node JS application with a vanilla JS and HTML front-end where the user can login with their MetaMask wallet & Moralis Auth API and establish a JWT. 
+
+This demo let's you use the Moralis Auth API to login to a simple application, create and store a JWT and then use that JWT to verify a user and allow/disallow access to content. There is also a separate NFT token gating component included in this demo. 
+
+- Hit "Login With MetaMask" to generate and sign a new message and JWT.
+- "Get Access To Secret Content" - checks whether you have a valid JWT - if yes, you see link to "Access Token Gated Content"
+- "Access Token Gated Content" - searches through your NFTs for a specific token_id (you need to configure this in index.js). If you hold the NFT, you will see extra content. If you do not, you will see "access denied"
+- "Logout" - removes JWT from storage and clears the screen
 
 ### Prerequisites
 1. Create a Moralis account and have an API key (https://admin.moralis.io/account/profile)
@@ -29,23 +36,14 @@ Don't use your Moralis keys in the front end!
 
 Rename .env.example to .env add your Moralis API key 
 
-## Configure the Homepage index.html
-The homepage requires ethers and axios. 
-
-I've used a HTML forms to submit most data to our Node JS backend because it uses a POST action directly from the form. 
-
-The first thing to do is generate your request object for requesting a message. There is a detailed description of the variables you require for building that object here: https://docs.moralis.io/page/nodejs-sdk-reference
-
-- Hit "Login With MetaMask" to generate and sign a new message and JWT.
-- "Get Access To Secret Content" will check whether JWT is valid and provide link to "Access Token Gated Content"
-- "Access Token Gated Content" will search through your NFTs for a specific token id (you need to configure which) and let you see content if you hold it
-
 ## Configure the Server index.js and functions.js files
 Let's remove all the content from the nodejs-dapp-from-scratch tutorial (if you followed it) and use this.
 
 There are comments in the code to walk you through the functions and routes
 
 ## Next Steps
+You could add function to remove the JWT from the fakeTokenDB on logout
+
 You could develop this application to take the user back to the homepage and refresh the browser if they change their wallet. 
 
 You could increase the error handling and find ways to improve this application.
