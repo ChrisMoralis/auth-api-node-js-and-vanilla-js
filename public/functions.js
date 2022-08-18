@@ -84,5 +84,6 @@ async function getWallet (){
 
 ethereum.on('accountsChanged', async function () {
     alert('you want to change address?')
+    logout();
     login();
   })
