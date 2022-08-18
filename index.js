@@ -22,21 +22,13 @@ app.post("/send-data", async (req,res) => {
 
 // Verify signed message with Moralis Auth API then generate a JWT
 app.post("/verify-data", async (req,res) => {
-  const theSignedMessage = {message: req.body.data.message, signature:req.body.data.signature, network:"evm"};
+  const {message,signature} = req.body.data;
+  const theSignedMessage = {message, signature, network:"evm"};
   const {result} = await Moralis.Auth.verify(theSignedMessage);
   // Generate JWT
   const theJWT = await jwt.sign(result, process.env.ACCESS_TOKEN_SECRET);
   res.json({theJWT,...result});
 });
-
-// CHECK FOR VALID JWT
-// Verify if user can access 'secret content' by using the authenticateToken middleware function
-// app.get('/secret', authenticateToken, (req, res) => {
-//   res.json({access:true});
-// })
-
-// TOKEN GATING
-// Verify if user can access token-gated content by using the authenticateToken middleware function
 
 app.post("/token-gate", authenticateToken, async (req,res) => {
   // Calling Moralis NFT API polygon NFT id: 113461209507512867518933452141320285231135646094834536306130710983923277496520
